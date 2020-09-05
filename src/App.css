@@ -1,0 +1,28 @@
+@import '~antd/dist/antd.css';
+
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    overflow-x: hidden;
+    background: "#fafcff"
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+.settings  .ant-select-selector {
+    min-height: 40px;
+    padding-left: 12px;
+}
+
+.settings .ant-select-selection-search-input{
+    margin: '0px'
+}
