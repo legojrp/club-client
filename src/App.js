@@ -83,8 +83,8 @@ const App = () => {
 
 
 
-    //   setShownNotif(true)
-    // }
+      setShownNotif(true)
+    }
 
   }, [auth])
 
