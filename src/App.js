@@ -65,26 +65,26 @@ const App = () => {
 
     }
 
-    if(!shownNotif && auth.isAuth){
-      notification.open({
-        message: 'Please provide beta feedback!',
-        placement: "bottomRight",
-        style: {borderRadius: "10px"},
-        description: (
-          <Text>     
-          Have a feature you want? Found a bug? Please provide any feedback to us <Link href="https://ant.design" target="_blank">here</Link>
-        </Text>
-        ),
-        duration: "3"
-      });
+    // if(!shownNotif && auth.isAuth){
+    //   notification.open({
+    //     message: 'Please provide beta feedback!',
+    //     placement: "bottomRight",
+    //     style: {borderRadius: "10px"},
+    //     description: (
+    //       <Text>     
+    //       Have a feature you want? Found a bug? Please provide any feedback to us <Link href="https://ant.design" target="_blank">here</Link>
+    //     </Text>
+    //     ),
+    //     duration: "3"
+    //   });
 
 
 
 
 
 
-      setShownNotif(true)
-    }
+    //   setShownNotif(true)
+    // }
 
   }, [auth])
 

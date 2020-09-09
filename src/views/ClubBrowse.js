@@ -586,10 +586,10 @@ const ClubBrowse = ({history}) => {
               
             </div>
         </div>
-
+{/* 
         <Modal title="Pre-Release Disclaimer" onCancel={() => setBetaModal(false)}  visible={betaModal} onOk={() => setBetaModal(false)}>
             <Text>HSE Clubs is currently in alpha, allowing users to act as teachers and students for testing purposes. Only teacher accounts can register and sponsor clubs; in the final release the only way to obtain a teacher account will be by signing up with and verifying an @hse.k12.in.us email. <br/> <br/> <Text strong> Content on this site is by no means sponsored or moderated by HSE Apps during this pre-release.</Text> <br/> <br/> If you would like to test as a student, please use an email with an @gmail.com domain, and if you would like to test as a teacher, signup with a @hsestudents.org domain. Thank you for participating in this pre-release.</Text>
-        </Modal>
+        </Modal> */}
         </>
     )
 }
