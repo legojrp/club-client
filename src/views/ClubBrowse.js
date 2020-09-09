@@ -324,7 +324,7 @@ const ClubBrowse = ({history}) => {
             <div style={{textAlign: 'center'}}>
                 <Input.TextArea onChange={(e) => setModal({...modal, message: e.target.value})} placeholder='Your message' value={modal.message}>
                 </Input.TextArea>
-                <Text>{modal.club?.officers.length + modal.club?.members.length - modal.club?.settings.smsDisabled.length} will recieve an SMS notification</Text>
+                <Text>{modal.club?.officers.length + modal.club?.members.length - modal.club?.settings.smsDisabled.length} will recieve an SMS notification if they have linked their phone number</Text>
             </div>
 
         </Modal>
@@ -364,7 +364,7 @@ const ClubBrowse = ({history}) => {
                                 description={<Text> {announcement.message} </Text>}
                                 />
 
-                            </List.Item>
+                            </List.Item>    
                         )
                     }}
                 
@@ -383,29 +383,48 @@ const ClubBrowse = ({history}) => {
                         dataSource={userClubs}
                         renderItem={(club) => {
                         let actions = []
-                        if(club.officers.includes(auth.user._id) || club.sponsors.includes(auth.user._id)){
-                            actions = [
-                                <Link ><Tooltip title="Make Announcement"><Badge><NotificationOutlined onClick={() => setModal({open: true, club})} style={{color:"rgba(0, 0, 0, 0.45)"}}/></Badge></Tooltip></Link>,
-                                <Link to={`/clubs/${club.url}/settings`}> <Badge dot={club.applicants.length >= 1} offset={[-2,1]}><Tooltip title="Settings"><SettingOutlined style={{color:"rgba(0, 0, 0, 0.45)"}}/></Tooltip> </Badge></Link>
-                            ]
-                        } else {
-                            let newAnnouncement = false;
-                            let userLastViewDate;
 
-                            try{
-                                userLastViewDate = club.announcementViewDate[auth.user._id]
-                            } catch(err){
-                                userLastViewDate = 1
-                            }
-                                if(clubAnnouncements){
-                                    if(clubAnnouncements[club.url]){
-                                            newAnnouncement = clubAnnouncements[club.url].announcements.some((announcement) => {
-                                                return Date.parse(announcement.date) > userLastViewDate
-                                            })
-                                    
-                                    }
+
+                        let newAnnouncement = false;
+                        let userLastViewDate;
+
+                        try{
+                            userLastViewDate = club.announcementViewDate[auth.user._id]
+                        } catch(err){
+                            userLastViewDate = 1
+                        }
+                            if(clubAnnouncements){
+                                if(clubAnnouncements[club.url]){
+                                        newAnnouncement = clubAnnouncements[club.url].announcements.some((announcement) => {
+                                            return Date.parse(announcement.date) > userLastViewDate
+                                        })
+                                
                                 }
+                            }
 
+
+                        if(club.officers.includes(auth.user._id) || club.sponsors.includes(auth.user._id)){
+                            if(club.officers.includes(auth.user._id)){
+                                actions = [
+                                    <Link><Tooltip title="Announcements"><Badge dot={newAnnouncement || false} offset={[-3,1]}><BellOutlined onClick={() => {
+                                        markRead(club.url)
+                                        setAModal({open: true, club: club})
+                                    }} style={{color:"rgba(0, 0, 0, 0.45)"}}/></Badge></Tooltip></Link>,
+                                    <Link ><Tooltip title="Make Announcement"><Badge><NotificationOutlined onClick={() => setModal({open: true, club})} style={{color:"rgba(0, 0, 0, 0.45)"}}/></Badge></Tooltip></Link>,
+                                    <Link to={`/clubs/${club.url}/settings`}> <Badge dot={club.applicants.length >= 1} offset={[-2,1]}><Tooltip title="Settings"><SettingOutlined style={{color:"rgba(0, 0, 0, 0.45)"}}/></Tooltip> </Badge></Link>,
+                                  
+                        
+                                ]
+                            } else {
+                                actions = [
+                                    <Link ><Tooltip title="Make Announcement"><Badge><NotificationOutlined onClick={() => setModal({open: true, club})} style={{color:"rgba(0, 0, 0, 0.45)"}}/></Badge></Tooltip></Link>,
+                                    <Link to={`/clubs/${club.url}/settings`}> <Badge dot={club.applicants.length >= 1} offset={[-2,1]}><Tooltip title="Settings"><SettingOutlined style={{color:"rgba(0, 0, 0, 0.45)"}}/></Tooltip> </Badge></Link>,
+
+                                ]
+                            }
+
+                        } else {
+                          
                           
                           
                             
