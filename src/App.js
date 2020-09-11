@@ -75,7 +75,7 @@ const App = () => {
           Have a feature you want? Found a bug? Please provide any feedback to us <Link href="https://airtable.com/shrJJ9EvbYFOKYXdX" target="_blank">here</Link>
         </Text>
         ),
-        duration: "3"
+        duration: "20"
       });
 
 
