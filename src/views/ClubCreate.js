@@ -7,6 +7,7 @@ import AuthContext from '../auth/AuthContext'
 import ClubContext from '../util/ClubContext'
 import {motion} from 'framer-motion'
 import axios from 'axios'
+import TagSelector from './SharedComponents/TagSelctor';
 const {SubMenu} = Menu
 
 const {Title , Text, Paragraph} = Typography
@@ -243,14 +244,11 @@ const ClubSettings = ({history}) => {
                                             <div style={{marginBottom:"3px"}}>
                                                 <Text strong style={{fontSize: "10px"}}>TAGS </Text>
                                             </div>
-                                            <Select
-                                                size={"default"}
-                                                mode="multiple"
-                                                style={{ width: '100%',border: "none",  borderRadius: "5px"}}
-                                                placeholder=" Search club tags"
-                                                value={form.tags}
+                                            <TagSelector
                                                 className="settings"
-                                                onSelect={(e) => {
+                                                placeholder="Adds tag to allow for easier searchability"
+                                                value={form.tags}
+                                                handleSelect={(e) => {
                                                     setEdited(true)
                                                     console.log(form.tags.length)
                                                     if(form.tags.length >= 3){
@@ -259,33 +257,14 @@ const ClubSettings = ({history}) => {
                                                         setForm({...form , tags: [...form.tags, e]})
                                                     }
                                                 }}
-                                                onDeselect={(e) => {
+                                                handleDeselect={(e) => {
                                                     setEdited(true)
 
                                                     setForm({...form , tags: form.tags.filter( (tag) => e != tag)})
                                                 }}
                                         
-                                            >
-                                           <Option key="Academics"> Academics </Option>
-                                                <Option key="Art"> Art </Option>
-                                                <Option key="Athletics"> Athletics </Option>
-                                                <Option key="Business"> Business </Option>
-                                                <Option key="Competition"> Competition </Option>
-                                                <Option key="Cultural"> Cultural </Option>
-                                                <Option key="Cooking"> Cooking </Option>
-                                                <Option key="Diversity"> Diversity </Option>
-
-                                                <Option key="Gaming"> Gaming </Option>
-                                                <Option key="Mentorship"> Mentorship </Option>
-                                                <Option key="Politics"> Politics </Option>
-                                                <Option key="Programming"> Programming </Option>
-                                                <Option key="Religion">Religion</Option>
-                                                <Option key="Science">Science</Option>
-                                                <Option key="Theater"> Theater </Option>
-                                                <Option key="Technology"> Technology </Option>
-                                                <Option key="Volunteering"> Volunteering </Option>
-
-                                            </Select>
+                                            />
+                                           
                                     </div>
                                     <div style={{marginBottom: "15px"}}>
                                             <div style={{marginBottom:"3px"}}>
