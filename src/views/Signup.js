@@ -2,7 +2,7 @@ import React, {useContext, useEffect,useState}from 'react'
 import { UserOutlined, LockOutlined, CloseOutlined, MailOutlined } from '@ant-design/icons';
 import {Link, useHistory} from 'react-router-dom'
 import { Card, Typography, Input, Button} from 'antd';
-import AuthContext from './AuthContext'
+import AuthContext from '../contexts/AuthContext'
 import logo from '../img/hsekey.png'
 import axios from 'axios'
 const {Title, Text} = Typography

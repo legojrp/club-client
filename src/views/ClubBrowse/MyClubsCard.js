@@ -12,8 +12,8 @@ import { NotificationOutlined, SettingOutlined, MoreOutlined, UserDeleteOutlined
 
 import axios from 'axios'
 
-import AuthContext from "../../auth/AuthContext"
-import UserClubContext from '../../util/UserClubContext';
+import AuthContext from "../../contexts/AuthContext"
+import UserClubContext from '../../contexts/UserClubContext';
 
 
 const {Text} = Typography

@@ -1,7 +1,7 @@
 import React , {useEffect, useContext, useState} from 'react';
 import {useParams, useHistory} from 'react-router-dom'
 import axios from 'axios'
-import AuthContext from "../../auth/AuthContext"
+import AuthContext from "../../contexts/AuthContext"
 import Navbar from '../../util/Navbar'
 
 import ContactCard from'./ContactCard'
@@ -13,7 +13,7 @@ import Error404 from '../../util/404'
 
 import { Row, Col, Typography, Card, message} from 'antd';
 import ClubContext from '../../util/ClubContext'
-import UserClubContext from '../../util/UserClubContext'
+import UserClubContext from '../../contexts/UserClubContext'
 const {Text} = Typography
 
 

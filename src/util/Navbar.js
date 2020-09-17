@@ -7,7 +7,7 @@ import { UserOutlined, SearchOutlined, LogoutOutlined, MenuOutlined, SettingOutl
 
 
 import logo from '../img/hseapps.png'
-import AuthContext from '../auth/AuthContext'
+import AuthContext from '../contexts/AuthContext'
 
 import {motion} from 'framer-motion'
 const {SubMenu} = Menu

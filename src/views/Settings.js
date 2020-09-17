@@ -1,11 +1,13 @@
 import React , {useState, useContext, useEffect} from 'react';
 import Navbar from '../util/Navbar'
 import {useParams, useLocation} from 'react-router-dom'
+import SettingsNav from './SharedComponents/SettingsNav'
 import { Row, Col, Typography, PageHeader, Card, Select, Upload, Avatar, Menu, Badge, Button, Input, Switch, Divider, message, Tooltip} from 'antd';
 import { MinusCircleTwoTone, CheckCircleTwoTone, HomeOutlined, UserOutlined, ForkOutlined, UploadOutlined, LogoutOutlined } from '@ant-design/icons';import { UserDeleteOutlined} from '@ant-design/icons';
-import AuthContext from '../auth/AuthContext'
+import AuthContext from '../contexts/AuthContext'
 import {motion} from 'framer-motion'
 import axios from 'axios'
+import AvatarUpload from './SharedComponents/AvatarUpload';
 const {SubMenu} = Menu
 
 const {Title , Text, Paragraph} = Typography
@@ -23,7 +25,6 @@ const Settings = ({history}) => {
     
     const {auth, setAuth} = useContext(AuthContext)
     const [activeKey, setActiveKey] = useState("info")
-    const [imgUpload, setImgUploaded] = useState(null)
     const [form, setForm] = useState()
     const [errors,setErrors] = useState([])
     const [edited,setEdited] = useState(false)
@@ -53,27 +54,7 @@ const Settings = ({history}) => {
         setForm({...form, [e.target.id]: e.target.value})
      }
 
-    const props = {
-        name: 'file',
-        action: `${process.env.REACT_APP_AUTH_API}/static`,
-        headers:{
-          authorization: 'test'
-        },
-        onChange(info) {
-          if (info.file.status !== 'uploading') {
 
-          }
-          if (info.file.status === 'done') {
-              setEdited(true)
-              setForm({...form, img: info.file.response})
-          } else if (info.file.status === 'error') {
-
-          }
-
-
-        },
-        showUploadList: false
-      }
 
     const updateUser = async () => { 
         try{
@@ -122,23 +103,19 @@ const Settings = ({history}) => {
             />
                 <div style={{margin:"20px 40px 0px 48px", display:"flex", justifyContent:"space-between"}}>
                     <div style={{width: "20%", minWidth: "275px", marginBottom: "40px"}}>
-                    <Card hoverable style={{borderRadius: "20px", padding: "0px"}}>
-                                <Menu
-                                    mode="inline"
-                                    style={{ borderRadius: "20px", border: "0px" }}
-                                    selectable={false}
-                                    onClick={(e) =>{
-                                        setActiveKey(e.key)
-                                        if(e.key == 'logout'){
-                                            logout()
-                                        }
-                                    }}
-                                >
-                                     <Menu.Item key="info" style={activeKey == "info" && {color: "#1890ff"} }icon={<UserOutlined />}>My Account</Menu.Item>
-                                     {/* <Menu.Item key="test" style={activeKey == "test" && {color: "#1890ff"} }icon={<ForkOutlined />}>Early Adopter Program</Menu.Item> */}
-                                     <Menu.Item key="logout" danger style={activeKey && {color: "#ff4d4f"}}icon={<LogoutOutlined />}>Logout</Menu.Item>
-                                </Menu>
-                    </Card>
+
+                        <SettingsNav
+                            onClick={(e) => {
+                                setActiveKey(e.key)
+                                if(e.key == 'logout'){
+                                    logout()
+                                }
+                            }}
+                        >
+                            <Menu.Item key="info" style={activeKey == "info" && {color: "#1890ff"} }icon={<UserOutlined />}>My Account</Menu.Item>
+                            <Menu.Item key="logout" danger style={activeKey && {color: "#ff4d4f"}}icon={<LogoutOutlined />}>Logout</Menu.Item>
+                        </SettingsNav>
+
                   
                     </div>
 
@@ -150,16 +127,14 @@ const Settings = ({history}) => {
                         <>
 
                     <div style={{width:"100%", display:"flex"}}>
-                            <Upload {...props}>
-                                <Badge offset={[-20, 10]} style={{background:"White"}} count={
-                                    <Button style={{background:"White"}} shape="circle">
-                                          <UploadOutlined></UploadOutlined>
-                                    </Button>
-                                        // <UploadOutlined style={{padding: "7px", borderRadius: "100px", boxShadow: "1px 1px 10px rgba(0,0,0,0.15)"}}></UploadOutlined>
-                                }>
-                                    <Avatar size={100} style={{border: "0.5px solid #eee"}} src={form.img ? form.img : auth.user.profilePictureURL}></Avatar>
-                                </Badge>
-                            </Upload>
+                        <AvatarUpload  
+                            avatar={form.img ? form.img : auth.user.profilePictureURL}
+                            changeHandeler={(info) => {
+                                if (info.file.status === 'done') {
+                                    setEdited(true)
+                                    setForm({...form, img: info.file.response})
+                                } 
+                        }}/>
                         <div style={{display: "flex",paddingLeft: "20px", justifyContent: "space-evenly", width: "calc(100% - 100px)", flexDirection:"row"}}>
                                 <div style={{width: "45%"}}>
                                     <div style={{marginBottom: "15px"}}>
@@ -244,11 +219,6 @@ const Settings = ({history}) => {
                  
                     </div>
                     </div>
-            
-
-
-                
-              
             </Col>
         </Row>
         </>

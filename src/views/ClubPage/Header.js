@@ -5,7 +5,7 @@ import {Typography, Avatar, PageHeader} from 'antd'
 
 
 
-import AuthContext from "../../auth/AuthContext"
+import AuthContext from "../../contexts/AuthContext"
 
 
 const {Text, Title} = Typography

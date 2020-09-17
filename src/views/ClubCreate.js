@@ -3,12 +3,14 @@ import Navbar from '../util/Navbar'
 import {useParams} from 'react-router-dom'
 import { Row, Col, Typography, PageHeader, Card, Select, Upload, Avatar, Menu, Badge, Button, Input, Divider, message, List, Tooltip, Switch, Popconfirm} from 'antd';
 import { TeamOutlined, HomeOutlined, CloseOutlined, MinusCircleOutlined, PlusOutlined, UploadOutlined, VideoCameraOutlined, LinkOutlined, InstagramOutlined, MailOutlined} from '@ant-design/icons';import { UserDeleteOutlined} from '@ant-design/icons';
-import AuthContext from '../auth/AuthContext'
+import AuthContext from '../contexts/AuthContext'
 import ClubContext from '../util/ClubContext'
 import {motion} from 'framer-motion'
 import axios from 'axios'
 import TagSelector from './SharedComponents/TagSelctor';
+import AvatarUpload from './SharedComponents/AvatarUpload'
 const {SubMenu} = Menu
+
 
 const {Title , Text, Paragraph} = Typography
 const { Option, OptGroup } = Select;
@@ -161,16 +163,16 @@ const ClubSettings = ({history}) => {
                 
                         <div style={{width: "100%", display: "flex", justifyContent:"space-evenly"}}>
                         
-                        <Upload {...props}>
-                                    <Badge offset={[-20, 10]} style={{background:"White"}} count={
-                                        <Button style={{background:"White"}} shape="circle">
-                                            <UploadOutlined></UploadOutlined>
-                                        </Button>
-                                            // <UploadOutlined style={{padding: "7px", borderRadius: "100px", boxShadow: "1px 1px 10px rgba(0,0,0,0.15)"}}></UploadOutlined>
-                                    }>
-                                        <Avatar size={100} style={{border: "0.5px solid #eee"}} src={form.logo ? form.logo : ""}></Avatar>
-                                    </Badge>
-                        </Upload>
+                        <AvatarUpload  
+                            avatar={form.logo}
+                            changeHandeler={(info) => {
+                                      if (info.file.status === 'done') {
+                                        setEdited(true)
+                                        setForm({...form, logo: info.file.response})
+                            } 
+                        }}/>
+
+                        
                         <div style={{display: "flex",paddingLeft: "10px", justifyContent: "space-evenly", width: "calc(100% - 110px)", flexDirection:"row"}}>                                    
                                     <div style={{width: "45%"}}>
                                         <div style={{marginBottom: "15px"}}>

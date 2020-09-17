@@ -8,9 +8,9 @@ import LoadingCard from '../../util/LoadingCard'
 import { UserOutlined, TagOutlined, InstagramOutlined, NotificationOutlined, SearchOutlined, SettingOutlined, MoreOutlined, UserDeleteOutlined, BellOutlined, GithubOutlined} from '@ant-design/icons';
 import { useState } from 'react';
 import axios from 'axios'
-import AuthContext from '../../auth/AuthContext'
+import AuthContext from '../../contexts/AuthContext'
 import ClubContext from '../../util/ClubContext';
-import UserClubContext from '../../util/UserClubContext';
+import UserClubContext from '../../contexts/UserClubContext';
 import moment from 'moment'
 
 

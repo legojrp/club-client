@@ -6,7 +6,7 @@ import { Modal, Col, Typography, Button, Avatar, Menu, Card, Select, Tag, Toolti
 
 import logo from '../img/icon.jpeg'
 
-import AuthContext from '../auth/AuthContext'
+import AuthContext from '../contexts/AuthContext'
 
 
 const {Title , Text, Paragraph} = Typography
