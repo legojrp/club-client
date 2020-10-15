@@ -12,10 +12,10 @@ const {Title , Text, Paragraph} = Typography
 
 
 const Navbar = ({clubData}) => {
-  const { name, color, description, sponsors, logo, url, members, officers, tags, tagline} = clubData
+  const { name, color, description, sponsors, logo, url, members, officers, tags, tagline, _id} = clubData
   return (
     <Link to={"/clubs/" + url}>
-        <Card style={{ width: "31.5rem", borderRadius: "1.5rem", height:"16.5rem", margin: "0px 2rem 2rem 0px",}} hoverable loading={false}>
+        <Card key={_id} style={{ width: "31.5rem", borderRadius: "1.5rem", height:"16.5rem", margin: "0px 2rem 2rem 0px",}} hoverable loading={false}>
             <Row>
                     <Col span={17}>
                         <Title level={4}>{name}</Title>
