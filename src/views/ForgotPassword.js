@@ -34,7 +34,7 @@ const Verify = ({history}) => {
                 setLoading(true)
                 const res = await axios.put(`${process.env.REACT_APP_AUTH_API}/user/password/reset`, {email: formData.email})
 
-                
+                setError(false)
                 setLoading(false)                
                 setSent(true)
 
