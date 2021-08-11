@@ -32,11 +32,13 @@ const TagSelector = ({handleSelect, handleDeselect, defaultValue, value, classNa
         <Option key="Mentorship"> Mentorship </Option>
         <Option key="Politics"> Politics </Option>
         <Option key="Programming"> Programming </Option>
+        <Option key="Recreation">Recreation </Option>
         <Option key="Religion">Religion</Option>
         <Option key="Science">Science</Option>
         <Option key="Theater"> Theater </Option>
         <Option key="Technology"> Technology </Option>
         <Option key="Volunteering"> Volunteering </Option>
+
     </Select>
     )
 }

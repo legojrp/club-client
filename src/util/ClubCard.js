@@ -15,7 +15,7 @@ const Navbar = ({clubData}) => {
   const { name, color, description, sponsors, logo, url, members, officers, tags, tagline, _id} = clubData
   return (
     <Link to={"/clubs/" + url}>
-        <Card key={_id} style={{ width: "31.5rem", borderRadius: "1.5rem", height:"16.5rem", margin: "0px 2rem 2rem 0px",}} hoverable loading={false}>
+        <Card key={_id} style={{ width: "31.5rem", borderRadius: "1.5rem", height:"15rem", margin: "0px 2rem 2rem 0px",}} hoverable loading={false}>
             <Row>
                     <Col span={17}>
                         <Title level={4}>{name}</Title>
@@ -34,7 +34,7 @@ const Navbar = ({clubData}) => {
                     <Col span={6} style={{display: "flex", alignItems:"flex-end"}}>
                         <Text><UserOutlined></UserOutlined> {members.length + officers.length + sponsors.length } </Text>
                     </Col>
-                    <Col span={12} offset={6} align="right">
+                    <Col span={12} offset={6} align="right" style={{display: 'none'}}>
                         <Text style={{letterSpacing:"0.24rem", fontSize: "10px"}}> M T W T F </Text>
                         <br/>
                         <Text> Before </Text> <Text style={{marginLeft: "5px"}}> <CalendarOutlined/> <CalendarOutlined/> <CalendarOutlined/> <CalendarOutlined/> <CalendarOutlined/> </Text>
