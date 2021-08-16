@@ -4,7 +4,7 @@ import {Input, Button, Typography} from 'antd'
 import { LinkOutlined, InstagramOutlined, MailOutlined} from '@ant-design/icons'
 
 import AvatarUpload from '../SharedComponents/AvatarUpload'
-import TagSelector from '../SharedComponents/TagSelctor'
+import TagSelector from '../SharedComponents/TagSelector'
 
 
 const {Text} = Typography

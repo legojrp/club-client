@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import {Select, Input, Card, Typography, Tag} from 'antd'
 import { UserOutlined, TagOutlined, SearchOutlined} from '@ant-design/icons';
 
-import TagSelector from '../SharedComponents/TagSelctor'
+import TagSelector from '../SharedComponents/TagSelector'
 
 const {Option} = Select
 
