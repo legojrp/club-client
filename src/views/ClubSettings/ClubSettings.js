@@ -9,7 +9,7 @@ import axios from 'axios'
 import ClubContext from '../../util/ClubContext';
 import UserClubContext from '../../contexts/UserClubContext'
 import moment from 'moment'
-import TagSelector from '../SharedComponents/TagSelctor';
+import TagSelector from '../SharedComponents/TagSelector';
 import AvatarUpload from '../SharedComponents/AvatarUpload'
 import SettingsNav from '../SharedComponents/SettingsNav'
 

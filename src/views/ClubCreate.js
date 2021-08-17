@@ -7,7 +7,7 @@ import AuthContext from '../contexts/AuthContext'
 import ClubContext from '../util/ClubContext'
 import {motion} from 'framer-motion'
 import axios from 'axios'
-import TagSelector from './SharedComponents/TagSelctor';
+import TagSelector from './SharedComponents/TagSelector';
 import AvatarUpload from './SharedComponents/AvatarUpload'
 const {SubMenu} = Menu
 

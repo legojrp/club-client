@@ -15,7 +15,7 @@ import moment from 'moment'
 
 
 
-import TagSelector from '../SharedComponents/TagSelctor'
+import TagSelector from '../SharedComponents/TagSelector'
 import FilterClubsCard from './FilterClubsCard';
 import MyClubsCard from './MyClubsCard'
 
