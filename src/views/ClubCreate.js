@@ -69,7 +69,7 @@ const ClubSettings = ({history}) => {
         setEdited(true)
 
         if(e.target.id == 'name'){
-            setForm({...form, url: e.target.value.replaceAll(" ", "-").toLowerCase(), name: e.target.value})
+            setForm({...form, url: e.target.value.replaceAll(" ", "-").replaceAll("/", "-").toLowerCase(), name: e.target.value})
         } else if(e.target.id =='url'){
             setForm({...form, [e.target.id]: e.target.value.toLowerCase().replaceAll(" ", '-')})
 
