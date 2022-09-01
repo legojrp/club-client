@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^7.1.2",
     "antd": "^4.4.0",
     "axios": "^0.21.1",
+    "craco": "^0.0.3",
     "craco-less": "^1.17.0",
     "framer-motion": "^2.4.3-beta.2",
     "moment": "^2.27.0",
