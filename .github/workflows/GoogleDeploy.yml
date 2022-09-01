@@ -16,7 +16,7 @@ jobs:
     - id: 'build'
       run: |
         npm install    
-        npm run build
+        npm run build --prod
       
 
     - id: 'auth'
