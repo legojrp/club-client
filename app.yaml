@@ -1,5 +1,6 @@
 runtime: nodejs12
 service: clubs
+entrypoint: node build
 
 handlers:
   - url: /static
