@@ -12,12 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    
-    - id: 'build'
-      run: |
-        npm install    
-        npm run build --prod
-      
 
     - id: 'auth'
       uses: 'google-github-actions/auth@v0'
