@@ -31,5 +31,5 @@ jobs:
       - name: Deploy Docker image
         uses: "google-github-actions/deploy-cloudrun@v0"
         with:
-          service: $IMAGE_NAME
+          service: club-client
           image: $IMAGE_NAME
