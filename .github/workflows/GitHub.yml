@@ -16,7 +16,7 @@ jobs:
       - name: Login
         uses: "google-github-actions/auth@v0"
         with:
-          credentials_json: "${{ secrets.GCP_SA_KEY }}"
+          service_account: "${{ secrets.GCP_SA_KEY }}"
 
       - name: Configure Docker
         run: gcloud auth configure-docker --quiet
@@ -28,4 +28,7 @@ jobs:
         run: docker build . -t $IMAGE_NAME
 
       - name: Deploy Docker image
-        run: gcloud run deploy ${{ secrets.GCP_PROJECT_ID }} --image $IMAGE_NAME --region us-central1 --platform managed
+        uses: "google-github-actions/deploy-cloudrun@v0"
+        with:
+          service: $IMAGE_NAME
+          image: $IMAGE_NAME
