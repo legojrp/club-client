@@ -62,7 +62,7 @@ const AnnouncementMenu = ({club, auth, announcements, setAnnouncements}) => {
                         </div>
                     }
                     itemLayout="horizontal"
-                    dataSource={announcements.reverse()}
+                    dataSource={announcements}
                     renderItem={announcement => {
                         console.log(announcement)
                         return(
