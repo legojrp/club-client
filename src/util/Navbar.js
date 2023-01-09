@@ -8,9 +8,11 @@ import { UserOutlined, SearchOutlined, LogoutOutlined, MenuOutlined, SettingOutl
 
 import logo from '../img/hseapps.png'
 import AuthContext from '../contexts/AuthContext'
-
+import { loginRequest } from '../AuthConig';
 import {motion} from 'framer-motion'
+import { useMsal } from "@azure/msal-react";
 const {SubMenu} = Menu
+
 
 const {Title , Text, Paragraph} = Typography
 
@@ -55,8 +57,13 @@ const menu = (
 
 const Navbar = ({history}) => {
 
-  const {auth, setAuth} = useContext(AuthContext)
-
+  const {auth} = useContext(AuthContext)
+  const { instance, accounts } = useMsal();
+  function login(){
+    instance.loginPopup(loginRequest).catch(e => {
+           console.log(e+"login error");
+       });
+     }
   return (
     <> 
       <div style={{borderBottom: 'solid 1px rgba(0,0,0,0.1)'}}>
@@ -66,7 +73,7 @@ const Navbar = ({history}) => {
             <Title level={3} style={{margin: "0px 5px"}}> HSE Clubs</Title>
         </Col>
         <Col span={8} offset={8} style={{display: 'flex', alignItems: 'center', justifyContent: 'flex-end'}}>
-          {auth.isAuth ? 
+          {/* {auth.isAuth ? 
             <>
               <Text style={{marginRight: "10px", fontSize: "16px"}}>{auth.user.name}</Text>
                 <motion.div style={{marginRight: "10px"}} whileHover={{ scale: 1.03 }}>
@@ -83,16 +90,18 @@ const Navbar = ({history}) => {
             </>
           
           
-          :
+          : */}
             <>
 
-              <Link to="/login">
-                <Button type="primary" icon={<UserOutlined />} size={'mediun'}>
+              
+                <Button type="primary" icon={<UserOutlined />} size={'mediun'} onClick={() => {
+                    login();
+                  }}>
                     Login
                 </Button>
-              </Link>
+             
             </>
-          }
+          
         </Col>
         </Row>
   
