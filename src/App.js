@@ -2,7 +2,7 @@ import { Button, Modal, notification, Typography } from "antd";
 import React, { useEffect, useState } from "react";
 
 import { useMsal } from "@azure/msal-react";
-import { loginRequest } from "./AuthConig";
+import { loginRequest } from "./AuthConfig";
 
 import axios from "axios";
 import { BrowserRouter, Route, Switch, useParams } from "react-router-dom";
@@ -19,9 +19,7 @@ import UserClubContext from "./contexts/UserClubContext";
 import ClubContext from "./util/ClubContext";
 
 import ForgotPassword from "./views/ForgotPassword";
-// import Login from "./views/Login";
-// import ResetPassword from "./views/ResetPassword";
-import Signup from "./views/Signup";
+
 import Verify from "./views/Verify";
 
 import EmailModal from "./util/EmailModal";
@@ -67,20 +65,6 @@ const App = () => {
           testToken(response.accessToken);
         });
     }
-    // if (!auth.user) {
-    //   testToken();
-    // }
-    // if ((!auth.isAuth || auth.loading) && localStorage.getItem("token")) {
-    //   console.log("test token");
-    //   testToken();
-    // }
-
-    // if (
-    //   auth.isAuth &&
-    //   !auth.loading &&
-    //   (!auth.name || !auth.phone || !auth.class)
-    // ) {
-    // }
   }, [accounts]);
 
   function signOutClickHandler(instance) {
@@ -97,7 +81,7 @@ const App = () => {
         Authorization: `Bearer ${token}`,
       },
     });
-
+    
     if (
       res.data.jobTitle == "12" ||
       res.data.jobTitle == "11" ||
@@ -117,56 +101,27 @@ const App = () => {
         },
       }));
     }
-    // const token = localStorage.getItem("token");
-
-    // if (!token) {
-    //   console.log("no token");
-    // } else {
-    //   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-
-    //   try {
-    //     console.log("getting user data");
-    //     const res = await axios.get(
-    //       `${
-    //         process.env.REACT_APP_CLUB_API
-    //       }/user/?timestamp=${new Date().getTime()}`
-    //     );
-    //     console.log("respone");
-    //     console.log(res.data);
-    //     if (!res.data.errors) {
-    //       setAuth({ isAuth: true, user: res.data });
-    //       console.log("authed");
-    //     } else {
-    //       console.log("failed");
-    //       localStorage.removeItem("token");
-    //       setAuth({ isAuth: false });
-    //     }
-    //   } catch (err) {
-    //     localStorage.removeItem("token");
-    //     console.log(err.msg);
-    //     setAuth({ isAuth: false });
-    //   }
-    // }
   };
-  useEffect(async () => {
-    if (auth.user && !auth.fetched) {
-      const selectionRes = await axios.post(
-        `${process.env.REACT_APP_COURSE_API}/user`,
-        {
-          user: auth,
-        }
-      );
-      console.log(selectionRes, "SELECTION RES");
-      if (!selectionRes.data.errors) {
-        setAuth((prev) => ({
-          isAuth: true,
-          user: { ...prev.user, courseData: selectionRes.data.courseData },
-          loading: false,
-          fetched: true,
-        }));
-      }
-    }
-  }, [auth]);
+
+//  useEffect(async () => {
+//     if (auth.user && !auth.fetched) {
+//       const selectionRes = await axios.post(
+//         `${process.env.REACT_APP_COURSE_API}/user`,
+//         {
+//           user: auth,
+//         }
+//       );
+//       console.log(selectionRes, "SELECTION RES");
+//       if (!selectionRes.data.errors) {
+//         setAuth((prev) => ({
+//           isAuth: true,
+//           user: { ...prev.user, courseData: selectionRes.data.courseData },
+//           loading: false,
+//           fetched: true,
+//         }));
+//       }
+//     }
+//   }, [auth]);
 
   console.log(auth);
   return (

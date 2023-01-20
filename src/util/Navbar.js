@@ -8,7 +8,7 @@ import { UserOutlined, SearchOutlined, LogoutOutlined, MenuOutlined, SettingOutl
 
 import logo from '../img/hseapps.png'
 import AuthContext from '../contexts/AuthContext'
-import { loginRequest } from '../AuthConig';
+import { loginRequest } from '../AuthConfig';
 import {motion} from 'framer-motion'
 import { useMsal } from "@azure/msal-react";
 const {SubMenu} = Menu
@@ -60,7 +60,7 @@ const Navbar = ({history}) => {
   const {auth} = useContext(AuthContext)
   const { instance, accounts } = useMsal();
   function login(){
-    instance.loginPopup(loginRequest).catch(e => {
+    instance.loginRedirect(loginRequest).catch(e => {
            console.log(e+"login error");
        });
      }
