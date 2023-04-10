@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@azure/msal-browser": "^2.32.2",
     "@azure/msal-react": "^1.5.1",
     "@craco/craco": "^5.9.0",
     "@testing-library/jest-dom": "^4.2.4",

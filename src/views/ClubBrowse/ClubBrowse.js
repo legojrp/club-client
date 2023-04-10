@@ -119,7 +119,7 @@ console.log(auth.user)
                 <FilterClubsCard clubs={clubs} setFilteredClubs={setFilteredClubs}/>
                 
                 <div style={{width: '100%', textAlign:'center', paddingLeft: '40px'}}>
-                    <Text style={{fontSize: '12px'}}>Made by a NIGGA</Text>
+                    <Text style={{fontSize: '12px'}}>Made by a HSE</Text>
                     <br></br>
                     <Text style={{fontSize: '18px'}}>
                     <a target="_blank" href="https://instagram.com/hseapps"><InstagramOutlined style={{marginRight: '8px'}}></InstagramOutlined></a>
