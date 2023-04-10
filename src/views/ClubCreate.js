@@ -108,8 +108,9 @@ const ClubSettings = ({history}) => {
     
       const submitClub = async () => {
         try {
+            const msId = auth.user.localAccountId; // Add your string here
+            const clubRes = await axios.post(`${process.env.REACT_APP_CLUB_API}/club/`, { msId, form });
 
-            const clubRes = await axios.post(`${process.env.REACT_APP_CLUB_API}/club/`, form)
 
             setClubContext({...clubContext, [clubRes.data.url] : clubRes.data})
 

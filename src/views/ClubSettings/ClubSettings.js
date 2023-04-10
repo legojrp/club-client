@@ -227,7 +227,7 @@ const ClubSettings = ({history}) => {
                             }
                         </SettingsNav>
                     </div>
-
+   
                     <div style={{width: "75%", marginLeft:"2.5%"}}>
                             <Card  style={{ borderRadius: "20px", marginBottom: "20px"}}>
                                 {auth.user && form && 

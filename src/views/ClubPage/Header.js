@@ -23,14 +23,16 @@ const Header = ({club, leaveClub, joinClub, history}) => {
                 <Avatar size={50}  shape="round" src={club.logo} ></Avatar>
             ]
         } else {
-            const userIsMember = club.members.includes(auth.user._id)
-            const userIsOfficer = club.officers.includes(auth.user._id)
-            const userisSponser = club.sponsors.includes(auth.user._id)
-            const userIsApplicant = club.applicants.includes(auth.user._id)
+            
+            const userIsMember = club.members.includes(auth.user.localAccountId)
+            const userIsOfficer = club.officers.includes(auth.user.localAccountId)
+            const userisSponser = club.sponsors.includes(auth.user.localAccountIdd)
+            const userIsApplicant = club.applicants.includes(auth.user.localAccountId)
             if(userIsMember){
                 return[         
                     <Link><Text type="danger" onClick={leaveClub}> Leave Club</Text></Link>,
                     <Avatar size={50}  shape="round" src={club.logo} ></Avatar>
+             
                 ]
             } else if (userIsOfficer || userisSponser){
                 return[         
