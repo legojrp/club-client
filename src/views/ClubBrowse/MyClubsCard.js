@@ -145,7 +145,7 @@ const MyClubsCard = ({history}) => {
         <MakeAnnouncementModal modal={modal} setModal={setModal}/>
 
         {userClubs && 
-        <Card title="My Clubs" bordered={true} extra={ auth.user.role == "student" &&[<Link to='/create'>Register Club</Link>]} style={{ width: "100%", margin: "40px 20px ", borderRadius: "20px" }}>
+        <Card title="My Clubs" bordered={true} extra={ auth.user.role == "teacher" &&[<Link to='/create'>Register Club</Link>]} style={{ width: "100%", margin: "40px 20px ", borderRadius: "20px" }}>
         <List
             itemLayout="horizontal"
             dataSource={userClubs}

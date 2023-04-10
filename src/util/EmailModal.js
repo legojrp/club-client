@@ -55,7 +55,7 @@ const Navbar = ({testToken}) => {
                     {modal.error ? <Text type={"danger"}>{modal.error}</Text> : <Text> {modal.text || <a onClick={handleResend}>Resend Email</a>}</Text>}
               </div>
               <Button type='primary' onClick={handleButton} loading={modal.loading}>Continue</Button>
-            </div>} title="Email Verification" visible={auth.user.role == 'student' && !auth.user.verified}>
+            </div>} title="Email Verification" visible={auth.user.role == 'teacher' && !auth.user.verified}>
                 <Text>To ensure application security, we require that teachers verify their email. Please check your inbox and junk folder, and press continue once you've verified your email.</Text>
             </Modal>
         }
