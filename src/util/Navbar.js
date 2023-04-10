@@ -59,6 +59,7 @@ const Navbar = ({history}) => {
 
   const {auth} = useContext(AuthContext)
   const { instance, accounts } = useMsal();
+  console.log(auth)
   function login(){
     instance.loginRedirect(loginRequest).catch(e => {
            console.log(e+"login error");
@@ -73,24 +74,19 @@ const Navbar = ({history}) => {
             <Title level={3} style={{margin: "0px 5px"}}> HSE Clubs</Title>
         </Col>
         <Col span={8} offset={8} style={{display: 'flex', alignItems: 'center', justifyContent: 'flex-end'}}>
-          {/* {auth.isAuth ? 
+          {auth.isAuth ? 
             <>
               <Text style={{marginRight: "10px", fontSize: "16px"}}>{auth.user.name}</Text>
-                <motion.div style={{marginRight: "10px"}} whileHover={{ scale: 1.03 }}>
-                  <Link to="/settings">
-                    {auth.user.profilePictureURL == "default" ?
-                      <Avatar style={{cursor: "pointer"}} icon={<UserOutlined />} size={35} />
-                    :
-                      <Avatar style={{cursor: "pointer"}}src={auth.user.profilePictureURL} size={35} />
-                    }
-
-                  </Link>
-                </motion.div>
-
+                
+              <Button type="primary" icon={<UserOutlined />} size={'mediun'} onClick={() => {
+                    login();
+                  }}>
+                    SignOut
+                </Button>
             </>
+            
           
-          
-          : */}
+          :
             <>
 
               
@@ -101,7 +97,7 @@ const Navbar = ({history}) => {
                 </Button>
              
             </>
-          
+            }
         </Col>
         </Row>
   

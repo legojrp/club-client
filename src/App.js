@@ -39,7 +39,11 @@ const notifContent = () => {
 };
 
 const App = () => {
-  const [auth, setAuth] = useState({ isAuth: false });
+  const [auth, setAuth] = useState({
+    isAuth: false,
+    loading: true,
+    fetched: false,
+  });
   const [clubContext, setClubContext] = useState(null);
   const [shownNotif, setShownNotif] = useState(false);
   const [userClubContext, setUserClubContext] = useState(null);
@@ -67,12 +71,24 @@ const App = () => {
     }
   }, [accounts]);
 
-  function signOutClickHandler(instance) {
-    const logoutRequest = {
-      account: instance.getAccountByHomeId(auth.user.homeAccountId),
-      postLogoutRedirectUri: "https://google.com",
-    };
-    instance.logoutRedirect(logoutRequest);
+
+  async function signOutClickHandler(instance) {
+    const selectionRes = await axios.post(
+      `${process.env.REACT_APP_CLUB_API}/user`,
+      {
+        user: auth,
+      }
+    );
+    console.log(selectionRes, "SELECTION RES");
+    if (!selectionRes.data.errors) {
+      setAuth((prev) => ({
+        isAuth: true,
+        user: { ...prev.user },
+        loading: false,
+        fetched: true,
+      }));
+    }
+  
   }
 
   const testToken = async (token) => {
@@ -88,6 +104,7 @@ const App = () => {
       res.data.jobTitle == "10" ||
       res.data.jobTitle == "9"
     ) {
+
       setAuth((prev) => ({
         ...prev,
         isAuth: true,
@@ -100,13 +117,16 @@ const App = () => {
           grade: res.data.jobTitle,
         },
       }));
+      console.log(auth);
     }
   };
 
 //  useEffect(async () => {
+  
 //     if (auth.user && !auth.fetched) {
+//       console.log("FETCHING");
 //       const selectionRes = await axios.post(
-//         `${process.env.REACT_APP_COURSE_API}/user`,
+//         `${process.env.REACT_APP_CLUB_API}/user`,
 //         {
 //           user: auth,
 //         }
@@ -115,31 +135,58 @@ const App = () => {
 //       if (!selectionRes.data.errors) {
 //         setAuth((prev) => ({
 //           isAuth: true,
-//           user: { ...prev.user, courseData: selectionRes.data.courseData },
+//           user: { ...prev.user },
 //           loading: false,
 //           fetched: true,
 //         }));
 //       }
 //     }
+   
 //   }, [auth]);
 
-  console.log(auth);
+useEffect(() => {
+  const fetchData = async () => {
+    if (auth.user && !auth.fetched) {
+      console.log("FETCHING");
+      try {
+        const selectionRes = await axios.post(
+          `${process.env.REACT_APP_CLUB_API}/user`,
+          {
+            user: auth,
+          }
+        );
+        console.log(selectionRes, "SELECTION RES");
+        if (!selectionRes.data.errors) {
+          setAuth((prev) => ({
+            isAuth: true,
+            user: { ...prev.user },
+            loading: false,
+            fetched: true,
+          }));
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  fetchData();
+}, [auth]);
+
+ 
+
+  console.log(auth.user);
   return (
+    <AuthContext.Provider value={{ auth, setAuth }}>
     <UserClubContext.Provider value={{ userClubContext, setUserClubContext }}>
       <ClubContext.Provider value={{ clubContext, setClubContext }}>
-      <AuthContext.Provider value={{ auth, setAuth }}>
+      <button onClick={() => signOutClickHandler(instance)}IFNIJNEINFE></button>
           <BrowserRouter>
             <Switch>
               <Route exact path="/" component={ClubBrowse} />
-              <Route exact path="/verify/:token" component={Verify} />
-              <Route exact path="/forgot-password" component={ForgotPassword} />
-              {/* <Route
-                exact
-                path="/reset-password/:token"
-                component={ResetPassword}
-              /> */}
-              {/* <Route exact path="/login" component={Login} /> */}
-              {/* <Route exact path="/signup" component={Signup} /> */}
+     
+            
+            
               <Route exact path="/settings" component={Settings} />
               <Route exact path="/clubs/:club" component={Club} />
               <Route
@@ -152,11 +199,11 @@ const App = () => {
               <Route exact path="/contact"></Route>
               <Route exact path="/create" component={ClubCreate}></Route>
             </Switch>
-            <EmailModal testToken={testToken} />
           </BrowserRouter>
-        </AuthContext.Provider>
+       
       </ClubContext.Provider>
     </UserClubContext.Provider>
+     </AuthContext.Provider>
   );
 };
 

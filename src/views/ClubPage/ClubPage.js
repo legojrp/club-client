@@ -19,8 +19,10 @@ const {Text} = Typography
 
 
 const Club = ({history}) => {
+    
 
     const {auth, setAuth} = useContext(AuthContext)
+    console.log(auth)
     const {userClubContext, setUserClubContext} = useContext(UserClubContext)
     const {clubContext, setClubContext} = useContext(ClubContext)
 
@@ -63,8 +65,8 @@ const Club = ({history}) => {
             setClub(club)
 
 
-            const memberRes = await axios.get(`${process.env.REACT_APP_CLUB_API}/club/${clubURL}/members`)
-            setClubMembers(memberRes.data)
+            // const memberRes = await axios.get(`${process.env.REACT_APP_CLUB_API}/club/${clubURL}/members`)
+            // setClubMembers(memberRes.data)
         } catch (err) {
             setError(true)
         }
@@ -73,16 +75,22 @@ const Club = ({history}) => {
 
 
 
-    const joinClub = async () =>{
-        try{
-            const clubRes = await axios.post(`${process.env.REACT_APP_CLUB_API}/club/${clubURL}/members/`)
+    const joinClub = async () => {
+        try {
+            console.log()
+            const msId = auth.user.localAccountId; // Add your string here
 
+            const clubRes = await axios.post(
+              `${process.env.REACT_APP_CLUB_API}/club/${clubURL}/members`,
+              { msId } // Send the string in the request body
+            );
             setClub(clubRes.data)
             setClubContext({...clubContext, [clubURL]: clubRes.data})
 
-            if(clubRes.data.applicants.includes(auth.user._id)){
+            if(clubRes.data.applicants.includes(msId)){
                 message.success('Application Sent', 5)
 
+            
             } else {
                 message.success('Successfully Joined', 5)
             }
@@ -91,14 +99,19 @@ const Club = ({history}) => {
             fetchClubMembers()
 
         } catch (err) {
-            message.error('An error occured', 5)
+            console.log(err)
+            message.error('An error occured joining', 5)
         }
     }
 
     const leaveClub = async () => {
         try{
-
-            const clubRes = await axios.delete(`${process.env.REACT_APP_CLUB_API}/club/${clubURL}/members/`)
+            const msId = auth.user.localAccountId;
+            const clubRes = await axios.delete(`${process.env.REACT_APP_CLUB_API}/club/${clubURL}/members/`, {
+                headers: {
+                    'x-user-id': msId
+                }
+            });
             message.success('Successfully Left Club', 5)
             setClub(clubRes.data)
 
@@ -106,7 +119,7 @@ const Club = ({history}) => {
             fetchClubMembers()
 
         } catch(err){
-            message.error('An error occured', 5)
+            message.error('An error occured leaving', 5)
         }
     }
 
