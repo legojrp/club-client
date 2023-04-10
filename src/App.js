@@ -2,7 +2,7 @@ import { Button, Modal, notification, Typography } from "antd";
 import React, { useEffect, useState } from "react";
 
 import { useMsal } from "@azure/msal-react";
-import { loginRequest } from "./AuthConig";
+import { loginRequest } from "./AuthConig"
 
 import axios from "axios";
 import { BrowserRouter, Route, Switch, useParams } from "react-router-dom";
@@ -166,7 +166,6 @@ const App = () => {
     //   }
     // }
   };
-<<<<<<< HEAD
 
 //  useEffect(async () => {
   
@@ -190,27 +189,6 @@ const App = () => {
 //     }
    
 //   }, [auth]);
-=======
-  useEffect(async () => {
-    if (auth.user && !auth.fetched) {
-      const selectionRes = await axios.post(
-        `${process.env.REACT_APP_COURSE_API}/user`,
-        {
-          user: auth,
-        }
-      );
-      console.log(selectionRes, "SELECTION RES");
-      if (!selectionRes.data.errors) {
-        setAuth((prev) => ({
-          isAuth: true,
-          user: { ...prev.user, courseData: selectionRes.data.courseData },
-          loading: false,
-          fetched: true,
-        }));
-      }
-    }
-  }, [auth]);
->>>>>>> parent of 86259a1... Added HSE AD
 
 useEffect(() => {
   const fetchData = async () => {
