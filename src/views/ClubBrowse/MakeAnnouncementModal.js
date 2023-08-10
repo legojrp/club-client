@@ -37,7 +37,7 @@ const MakeAnnouncementModal = ({modal, setModal}) => {
             <div style={{textAlign: 'center'}}>
                 <Input.TextArea onChange={(e) => setModal({...modal, message: e.target.value})} placeholder='Your message' value={modal.message}>
                 </Input.TextArea>
-                <Text>{modal.club?.officers.length + modal.club?.members.length - modal.club?.settings.smsDisabled.length} will recieve an SMS notification if they have linked their phone number</Text>
+    
             </div>
 
       </Modal>

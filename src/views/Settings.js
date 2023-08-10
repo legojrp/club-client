@@ -160,7 +160,7 @@ const Settings = ({history}) => {
                                         </div>
                                         <Input id="phone"  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" onChange={handleForm} style={{width: "100%", height: "40px", borderRadius: "5px"}} type="tel" placeholder="Phone" value={form.phone}></Input>
                                     </div>
-                                    { auth.user.role == "student" &&
+                                    { auth.user.role == "teacher" &&
                                     <div>
                                         <div style={{marginBottom:"3px"}}>
                                             <Text strong style={{fontSize: "10px"}}>CLASS</Text>

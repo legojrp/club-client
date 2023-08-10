@@ -226,7 +226,6 @@ useEffect(() => {
     <AuthContext.Provider value={{ auth, setAuth }}>
     <UserClubContext.Provider value={{ userClubContext, setUserClubContext }}>
       <ClubContext.Provider value={{ clubContext, setClubContext }}>
-      <button onClick={() => signOutClickHandler(instance)}IFNIJNEINFE></button>
           <BrowserRouter>
             <Switch>
               <Route exact path="/" component={ClubBrowse} />

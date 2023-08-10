@@ -137,39 +137,52 @@ const Club = ({history}) => {
 
     return(
         <>
-            <Navbar></Navbar>
-            {error &&
-            <Error404 resource="club"/>
-            }
-            {club && 
-            <Row style={{background: "#fafcff", height:"100vh"}}>
-            
-                <Col span={22} style={{marginTop: "40px"}} offset={1}>
-                    <Header club={club} leaveClub={leaveClub} joinClub={joinClub} history={history}/>
-                    <div style={{margin:"20px 40px 0px 48px", display:"flex", justifyContent:"space-between"}}>
-                        <div style={{width: "70%", marginRight:"2.5%"}}>
+    <Navbar></Navbar>
+    {error &&
+        <Error404 resource="club"/>
+    }
+    {club && 
+        <Row style={{background: "#fafcff", height:"100vh"}}>
+            <Col span={22} style={{marginTop: "40px"}} offset={1}>
+                <Header club={club} leaveClub={leaveClub} joinClub={joinClub} history={history}/>
+                <div style={{margin:"20px 40px 0px 48px", display:"flex", justifyContent:"space-between"}}>
+                    <div style={{width: "70%", marginRight:"2.5%"}}>
 
-                            <Card hoverable  title="Description"style={{ borderRadius: "20px", marginBottom: "20px"}}>
-                                <Text>{club.description}</Text>
-                            </Card>
+                        <Card hoverable title="Description" style={{ borderRadius: "20px", marginBottom: "20px"}}>
+                            <Text>{club.description}</Text>
+                        </Card>
 
-                            
-                            {clubMembers && 
+                        {/* Embed YouTube media player inside a Card */}
+                        <Card style={{ borderRadius: "20px", marginBottom: "20px", overflow: "hidden"}}>
+                            <iframe 
+                                width="100%" 
+                                height="415px" 
+                                src={"https://www.youtube.com/embed/" + club.contact.youtube.slice(17)}
+                                title="YouTube video player" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                            </iframe>
+                        </Card>
+                        
+                        {clubMembers && 
                             <MemberList club={club} clubMembers={clubMembers} ></MemberList>
-                            }
+                        }
 
-                        </div>
-                        <div style={{width: "27.5%", minWidth: "275px"}}>
-                            
-                            <GetInvolvedCard club={club}></GetInvolvedCard>
-                            <ContactCard club={club}></ContactCard>
-
-                        </div>
                     </div>
-                </Col>
-            </Row>
-            }
-        </>
+                    <div style={{width: "27.5%", minWidth: "275px"}}>
+                        
+                        <GetInvolvedCard club={club}></GetInvolvedCard>
+                        <ContactCard club={club}></ContactCard>
+
+                    </div>
+                </div>
+            </Col>
+        </Row>
+    }
+</>
+
+    
     )
 }
 

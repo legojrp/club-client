@@ -59,12 +59,13 @@ const ClubSettings = ({history}) => {
             } else {
                 const clubRes = await axios.get(`${process.env.REACT_APP_CLUB_API}/club/${clubURL}`)
                 setClub(clubRes.data)
+                console.log(clubRes.data)
             }
 
-            const memberRes = await axios.get(`${process.env.REACT_APP_CLUB_API}/club/${clubURL}/members`)
-            const announcementRes = await axios.get(`${process.env.REACT_APP_CLUB_API}/club/${clubURL}/announcement`)
-            setClubMembers(memberRes.data)
-            setAnnouncements(announcementRes.data.announcements.reverse())
+            // const memberRes = await axios.get(`${process.env.REACT_APP_CLUB_API}/club/${clubURL}/members`)
+            // const announcementRes = await axios.get(`${process.env.REACT_APP_CLUB_API}/club/${clubURL}/announcement`)
+            // setClubMembers(memberRes.data)
+            // setAnnouncements(announcementRes.data.announcements.reverse())
 
         } catch (err) {
 
@@ -181,27 +182,26 @@ const ClubSettings = ({history}) => {
            
             <Col span={18} offset={3}>
             { (club && auth.user) && <>
-            <PageHeader
-                style={{marginTop: "40px"}}
-                className="site-page-header"
-                onBack={() => history.push('/')}
-                title={
-                    <div>
-                        <Title level={2} style={{marginBottom:"0px"} } > Manage Club</Title>
-                     
-                     
-                    </div>
-                }
-                extra={[
-                    <div style={{display: "flex", alignItems: "center"}}>
-                        <Text>{club.name}</Text>
-                        <Divider type="vertical" />
-                        <Text style={{margin: "0px"}}>{ club.sponsors.includes(auth.user._id) ? club.titles[auth.user._id] || "Sponsor" : club.titles[auth.user._id] || "Officer" }</Text>
-                        <Divider type="vertical" />
-                        <Avatar size={35}  shape="square"  src={form?.logo || club.logo}></Avatar>
-                    </div>
-                ]}
-            />
+                <PageHeader
+    style={{marginTop: "40px"}}
+    className="site-page-header"
+    onBack={() => history.push('/')}
+    title={
+        <div key="titleDiv">
+            <Title level={2} style={{marginBottom:"0px"} } > Manage Club</Title>
+        </div>
+    }
+    extra={[
+        <div key="extraDiv" style={{display: "flex", alignItems: "center"}}>
+            <Text>{club.name}</Text>
+            <Divider type="vertical" />
+            <Text style={{margin: "0px"}}>{ club.sponsors.includes(auth.user._id) ? club.titles[auth.user._id] || "Sponsor" : club.titles[auth.user._id] || "Officer" }</Text>
+            <Divider type="vertical" />
+            <Avatar size={35} shape="square" src={form?.logo || club.logo}></Avatar>
+        </div>
+    ]}
+/>
+
                 <div style={{margin:"20px 40px 0px 48px", display:"flex", justifyContent:"space-between"}}>
                     <div style={{width: "20%", minWidth: "275px", marginBottom: "40px"}}>
                         <SettingsNav
